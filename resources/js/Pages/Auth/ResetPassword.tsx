@@ -3,6 +3,7 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
+import { type ResetPasswordSchema } from "@/types/user";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 
@@ -13,12 +14,13 @@ export default function ResetPassword({
   token: string;
   email: string;
 }) {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    token: token,
-    email: email,
-    password: "",
-    password_confirmation: "",
-  });
+  const { data, setData, post, processing, errors, reset } =
+    useForm<ResetPasswordSchema>({
+      token: token,
+      email: email,
+      password: "",
+      password_confirmation: "",
+    });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
