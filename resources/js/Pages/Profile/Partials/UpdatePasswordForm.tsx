@@ -2,6 +2,7 @@ import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
+import { type UpdatePasswordSchema } from "@/types/user";
 import { Transition } from "@headlessui/react";
 import { useForm } from "@inertiajs/react";
 import { FormEventHandler, useRef } from "react";
@@ -15,7 +16,7 @@ export default function UpdatePasswordForm({
   const currentPasswordInput = useRef<HTMLInputElement>(null);
 
   const { data, setData, errors, put, reset, processing, recentlySuccessful } =
-    useForm({
+    useForm<UpdatePasswordSchema>({
       current_password: "",
       password: "",
       password_confirmation: "",
@@ -44,9 +45,9 @@ export default function UpdatePasswordForm({
   return (
     <section className={className}>
       <header>
-        <h2 className="text-lg font-medium text-gray-900">Update Password</h2>
+        <h2 className="text-lg font-medium text-foreground">Update Password</h2>
 
-        <p className="mt-1 text-sm text-foreground">
+        <p className="mt-1 text-sm text-secondary-foreground">
           Ensure your account is using a long, random password to stay secure.
         </p>
       </header>
@@ -61,7 +62,7 @@ export default function UpdatePasswordForm({
             value={data.current_password}
             onChange={(e) => setData("current_password", e.target.value)}
             type="password"
-            className="mt-1 block w-full"
+            className="block w-full mt-1"
             autoComplete="current-password"
           />
 
@@ -77,7 +78,7 @@ export default function UpdatePasswordForm({
             value={data.password}
             onChange={(e) => setData("password", e.target.value)}
             type="password"
-            className="mt-1 block w-full"
+            className="block w-full mt-1"
             autoComplete="new-password"
           />
 
@@ -95,7 +96,7 @@ export default function UpdatePasswordForm({
             value={data.password_confirmation}
             onChange={(e) => setData("password_confirmation", e.target.value)}
             type="password"
-            className="mt-1 block w-full"
+            className="block w-full mt-1"
             autoComplete="new-password"
           />
 
