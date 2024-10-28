@@ -3,16 +3,18 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
+import { type RegisterUserSchema } from "@/types/user";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 
 export default function Register() {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-  });
+  const { data, setData, post, processing, errors, reset } =
+    useForm<RegisterUserSchema>({
+      name: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+    });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
