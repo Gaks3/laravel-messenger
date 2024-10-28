@@ -5,6 +5,7 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
+import { type LoginSchema } from "@/types/user";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 
@@ -15,11 +16,12 @@ export default function Login({
   status?: string;
   canResetPassword: boolean;
 }) {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    email: "",
-    password: "",
-    remember: false,
-  });
+  const { data, setData, post, processing, errors, reset } =
+    useForm<LoginSchema>({
+      email: "",
+      password: "",
+      remember: false,
+    });
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -76,7 +78,7 @@ export default function Login({
               checked={data.remember}
               onChange={(e) => setData("remember", e.target.checked)}
             />
-            <span className="text-sm text-foreground ms-2">Remember me</span>
+            <span className="text-sm ms-2 text-foreground">Remember me</span>
           </label>
           {canResetPassword && (
             <Link href={route("password.request")} className="btn-link">
