@@ -1,6 +1,6 @@
 import { Transition } from "@headlessui/react";
 import { InertiaLinkProps, Link } from "@inertiajs/react";
-import {
+import React, {
   createContext,
   Dispatch,
   PropsWithChildren,
@@ -56,7 +56,7 @@ const Content = ({
   contentClasses = "py-1 bg-white",
   children,
 }: PropsWithChildren<{
-  align?: "left" | "right";
+  align?: "left" | "right" | "top-left" | "top-right";
   width?: "48";
   contentClasses?: string;
 }>) => {
@@ -65,9 +65,13 @@ const Content = ({
   let alignmentClasses = "origin-top";
 
   if (align === "left") {
-    alignmentClasses = "ltr:origin-top-left rtl:origin-top-right start-0";
+    alignmentClasses = "origin-top-left end-0 sm:start-0 mt-2";
   } else if (align === "right") {
-    alignmentClasses = "ltr:origin-top-right rtl:origin-top-left end-0";
+    alignmentClasses = "origin-top-right end-0 mt-2";
+  } else if (align === "top-left") {
+    alignmentClasses = "origin-bottom-left bottom-0 end-0 sm:start-0 mb-2";
+  } else if (align === "top-right") {
+    alignmentClasses = "origin-bottom-right bottom-0 end-0 mb-2";
   }
 
   let widthClasses = "";
@@ -93,7 +97,8 @@ const Content = ({
         >
           <div
             className={
-              `rounded-md ring-1 ring-black ring-opacity-5 ` + contentClasses
+              `rounded-lg bg-background p-2 ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-5 ` +
+              contentClasses
             }
           >
             {children}
@@ -113,7 +118,7 @@ const DropdownLink = ({
     <Link
       {...props}
       className={
-        "block w-full px-4 py-2 text-start text-sm leading-5 text-foreground transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none " +
+        "block w-full rounded-md px-4 py-2 text-start text-sm leading-5 text-foreground transition duration-150 ease-in-out hover:bg-secondary focus:bg-secondary focus:outline-none " +
         className
       }
     >
@@ -122,8 +127,27 @@ const DropdownLink = ({
   );
 };
 
+const DropdownButton = ({
+  className = "",
+  children,
+  ...props
+}: React.PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>>) => {
+  return (
+    <button
+      {...props}
+      className={
+        "block w-full rounded-md px-4 py-2 text-start text-sm leading-5 text-foreground transition duration-150 ease-in-out hover:bg-secondary focus:bg-secondary focus:outline-none " +
+        className
+      }
+    >
+      {children}
+    </button>
+  );
+};
+
 Dropdown.Trigger = Trigger;
 Dropdown.Content = Content;
 Dropdown.Link = DropdownLink;
+Dropdown.Button = DropdownButton;
 
 export default Dropdown;
