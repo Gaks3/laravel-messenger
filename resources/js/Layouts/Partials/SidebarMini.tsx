@@ -1,5 +1,7 @@
 import BadgeNotification from "@/Components/Chats/BadgeNotification";
 import Dropdown from "@/Components/Dropdown";
+import { useAppContext } from "@/Contexts/app.context";
+import { useModalContext } from "@/Contexts/modal.context";
 import { Link, usePage } from "@inertiajs/react";
 import clsx from "clsx";
 import {
@@ -12,10 +14,15 @@ import {
 } from "react-icons/bs";
 
 export default function SidebarMini() {
-  const { avatar } = usePage().props.auth;
+  const { auth } = useAppContext();
+  const { openModal } = useModalContext();
+
+  const openPreferences = () => {
+    openModal({ view: "PREFERENCES", size: "lg" });
+  };
 
   return (
-    <div className="flex flex-row justify-between order-2 mt-auto bg-background sm:order-1 sm:mt-0 sm:flex-col sm:items-center sm:justify-center sm:p-2">
+    <div className="order-2 mt-auto flex flex-row justify-between bg-background sm:order-1 sm:mt-0 sm:flex-col sm:items-center sm:justify-center sm:p-2">
       <Link
         href={route("chats.index")}
         className={clsx(
@@ -45,17 +52,17 @@ export default function SidebarMini() {
         <BsArchive className="size-6" />
       </Link>
 
-      <div className="flex items-center justify-center flex-1 px-3 transition-all rounded-lg cursor-pointer hover:bg-secondary sm:mt-auto sm:flex-initial sm:bg-transparent sm:px-0">
+      <div className="flex flex-1 cursor-pointer items-center justify-center rounded-lg px-3 transition-all hover:bg-secondary sm:mt-auto sm:flex-initial sm:bg-transparent sm:px-0">
         <Dropdown>
           <Dropdown.Trigger>
             <img
-              src={avatar ?? "/images/avatar.png"}
+              src={auth.avatar}
               alt="Profile Image"
-              className="border rounded-full size-8 border-secondary sm:size-10"
+              className="size-8 rounded-full border border-secondary sm:size-10"
             />
           </Dropdown.Trigger>
           <Dropdown.Content align="top-left" contentClasses="mb-12 sm:mb-10">
-            <Dropdown.Button>
+            <Dropdown.Button onClick={openPreferences}>
               <div className="flex items-center gap-2">
                 <BsGear />
                 References
