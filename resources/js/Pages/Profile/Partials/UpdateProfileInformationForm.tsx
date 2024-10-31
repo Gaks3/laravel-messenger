@@ -17,7 +17,7 @@ export default function UpdateProfileInformation({
   status?: string;
   className?: string;
 }) {
-  const user = usePage().props.auth.user;
+  const user = usePage().props.auth;
   const avatarRef = useRef<HTMLImageElement | null>(null);
 
   const { data, setData, post, errors, processing, recentlySuccessful } =
@@ -66,17 +66,17 @@ export default function UpdateProfileInformation({
         className="mt-6 space-y-6"
         encType="multipart/form-data"
       >
-        <div className="relative picture">
+        <div className="picture relative">
           <img
             src={user.avatar}
             alt={user.name}
-            className="mx-auto border rounded-full size-20 border-secondary"
+            className="mx-auto size-20 rounded-full border border-secondary"
             ref={avatarRef}
           />
 
           <label
             htmlFor="avatar"
-            className="absolute flex items-center justify-center px-2 translate-x-5 rounded-full cursor-pointer btn btn-primary left-1/2 top-6"
+            className="btn btn-primary absolute left-1/2 top-6 flex translate-x-5 cursor-pointer items-center justify-center rounded-full px-2"
             tabIndex={0}
           >
             <BsCamera />
@@ -95,7 +95,7 @@ export default function UpdateProfileInformation({
 
           <TextInput
             id="name"
-            className="block w-full mt-1"
+            className="mt-1 block w-full"
             value={data.name}
             onChange={(e) => setData("name", e.target.value)}
             required
@@ -112,7 +112,7 @@ export default function UpdateProfileInformation({
           <TextInput
             id="email"
             type="email"
-            className="block w-full mt-1"
+            className="mt-1 block w-full"
             value={data.email}
             onChange={(e) => setData("email", e.target.value)}
             required
