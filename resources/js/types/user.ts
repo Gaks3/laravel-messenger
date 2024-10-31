@@ -1,11 +1,14 @@
 import { type Method } from "./method";
 
 export interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
   email_verified_at?: string;
   avatar: string;
+  active_status: boolean;
+  is_online: boolean;
+  last_seen: string;
 }
 
 export type UpdateProfileSchema = {
