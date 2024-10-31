@@ -4,11 +4,13 @@ import { Head } from "@inertiajs/react";
 import DeleteUserForm from "./Partials/DeleteUserForm";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
+import { type User } from "@/types/user";
 
 export default function Edit({
   mustVerifyEmail,
   status,
-}: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
+  auth,
+}: PageProps<{ mustVerifyEmail: boolean; status?: string; auth: User }>) {
   return (
     <AuthenticatedLayout
       header={
@@ -16,12 +18,13 @@ export default function Edit({
           Profile
         </h2>
       }
+      user={auth}
     >
       <Head title="Profile" />
 
       <div className="py-4 sm:py-6">
-        <div className="px-4 mx-auto space-y-4 max-w-7xl sm:space-y-6 sm:px-6">
-          <div className="p-4 rounded-lg shadow bg-background sm:p-8">
+        <div className="mx-auto max-w-7xl space-y-4 px-4 sm:space-y-6 sm:px-6">
+          <div className="rounded-lg bg-background p-4 shadow sm:p-8">
             <UpdateProfileInformationForm
               mustVerifyEmail={mustVerifyEmail}
               status={status}
@@ -29,11 +32,11 @@ export default function Edit({
             />
           </div>
 
-          <div className="p-4 rounded-lg shadow bg-background sm:p-8">
+          <div className="rounded-lg bg-background p-4 shadow sm:p-8">
             <UpdatePasswordForm className="max-w-xl" />
           </div>
 
-          <div className="p-4 rounded-lg shadow bg-background sm:p-8">
+          <div className="rounded-lg bg-background p-4 shadow sm:p-8">
             <DeleteUserForm className="max-w-xl" />
           </div>
         </div>

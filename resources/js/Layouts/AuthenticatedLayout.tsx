@@ -1,13 +1,15 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import NavLink from "@/Components/NavLink";
+import { type User } from "@/types/user";
 import { Link } from "@inertiajs/react";
-import { PropsWithChildren, ReactNode } from "react";
+import { type PropsWithChildren, ReactNode } from "react";
 import { BsBoxArrowRight } from "react-icons/bs";
 
 export default function Authenticated({
   header,
   children,
-}: PropsWithChildren<{ header?: ReactNode }>) {
+  user,
+}: PropsWithChildren<{ header?: ReactNode; user: User }>) {
   return (
     <div className="min-h-screen bg-secondary">
       <nav className="border-b border-secondary bg-background">
