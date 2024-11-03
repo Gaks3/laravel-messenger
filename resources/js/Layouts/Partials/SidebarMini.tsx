@@ -2,7 +2,7 @@ import BadgeNotification from "@/Components/Chats/BadgeNotification";
 import Dropdown from "@/Components/Dropdown";
 import { useAppContext } from "@/Contexts/app.context";
 import { useModalContext } from "@/Contexts/modal.context";
-import { Link, usePage } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import clsx from "clsx";
 import {
   BsArchive,
@@ -22,7 +22,12 @@ export default function SidebarMini() {
   };
 
   return (
-    <div className="order-2 mt-auto flex flex-row justify-between bg-background sm:order-1 sm:mt-0 sm:flex-col sm:items-center sm:justify-center sm:p-2">
+    <div
+      className={clsx(
+        "order-2 mt-auto flex-row justify-between bg-background sm:order-1 sm:mt-0 sm:flex-col sm:items-center sm:justify-center sm:p-2",
+        route().current("chats.show") ? "hidden" : "flex",
+      )}
+    >
       <Link
         href={route("chats.index")}
         className={clsx(
