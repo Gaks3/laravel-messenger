@@ -9,7 +9,7 @@ export default function AppLayout({
     <AppProvider>
       <Head title={title} />
 
-      <div className="flex flex-col h-screen overflow-hidden bg-background text-foreground sm:flex-row">
+      <div className="flex h-screen flex-col overflow-hidden bg-background text-foreground sm:flex-row">
         {children}
       </div>
     </AppProvider>
